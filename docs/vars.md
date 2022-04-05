@@ -90,11 +90,17 @@ following default cluster parameters:
 * *kube_hostpath_dynamic_provisioner* - Required for use of PetSets type in
   Kubernetes
 * *kube_feature_gates* - A list of key=value pairs that describe feature gates for
-  alpha/experimental Kubernetes features. (defaults is `[]`)
+  alpha/experimental Kubernetes features. (defaults is `[]`).
+  Additionally, you can use also the following variables to individually customize your kubernetes components installation (they works exactly like `kube_feature_gates`):
+  * *kube_apiserver_feature_gates*
+  * *kube_controller_feature_gates*
+  * *kube_scheduler_feature_gates*
+  * *kube_proxy_feature_gates*
+  * *kubelet_feature_gates*
 * *kubeadm_feature_gates* - A list of key=value pairs that describe feature gates for
   alpha/experimental Kubeadm features. (defaults is `[]`)
 * *authorization_modes* - A list of [authorization mode](
-https://kubernetes.io/docs/admin/authorization/#using-flags-for-your-authorization-module)
+  https://kubernetes.io/docs/admin/authorization/#using-flags-for-your-authorization-module)
   that the cluster should be configured for. Defaults to `['Node', 'RBAC']`
   (Node and RBAC authorizers).
   Note: `Node` and `RBAC` are enabled by default. Previously deployed clusters can be
