@@ -41,12 +41,6 @@ spec:
     - --etcd-cafile={{ etcd_cert_dir }}/ca.pem
     - --etcd-certfile={{ etcd_cert_dir }}/node-{{ inventory_hostname }}.pem
     - --etcd-keyfile={{ etcd_cert_dir }}/node-{{ inventory_hostname }}-key.pem
-{% if kube_version is version('v1.20', '<') %}
-{% if kube_apiserver_insecure_port|string != "0" %}
-    - --insecure-bind-address={{ kube_apiserver_insecure_bind_address }}
-{% endif %}
-    - --insecure-port={{ kube_apiserver_insecure_port }}
-{% endif %}
     - --bind-address={{ kube_apiserver_bind_address }}
     - --apiserver-count={{ kube_apiserver_count }}
     - --endpoint-reconciler-type=lease
@@ -148,12 +142,8 @@ spec:
       httpGet:
         host: 127.0.0.1
         path: /healthz
-{% if kube_apiserver_insecure_port|int == 0 %}
         port: {{ kube_apiserver_port }}
         scheme: HTTPS
-{% else %}
-        port: {{ kube_apiserver_insecure_port }}
-{% endif %}
       failureThreshold: 8
       initialDelaySeconds: 15
       periodSeconds: 10
