@@ -1657,5 +1657,5 @@ download_defaults:
   version: None
   url: None
   unarchive: false
-  owner: kube
+  owner: "{{ kube_owner }}"
   mode: None
