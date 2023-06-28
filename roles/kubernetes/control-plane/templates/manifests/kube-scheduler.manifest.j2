@@ -47,7 +47,12 @@ spec:
       httpGet:
         host: 127.0.0.1
         path: /healthz
+{% if kube_version is version('v1.23', '>=') %}
+        port: 10259
+        scheme: HTTPS
+{% else %}
         port: 10251
+{% endif %}
       initialDelaySeconds: 30
       timeoutSeconds: 10
     volumeMounts:
